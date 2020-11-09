@@ -6,13 +6,15 @@ import fetchPosts from '../../../actions/fetchPosts';
 
 import RootState from '../../../types/states';
 
+import CardSpinner from './Spinner';
 import CardList from './List';
 import CardPlaceholder from './Placeholder';
 
 const Div = styled.div`
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: inherit;
+  max-width: inherit;
 `;
 
 const Cards: React.FC = () => {
@@ -26,11 +28,21 @@ const Cards: React.FC = () => {
     dispatch(fetchPosts());
   }, [dispatch]);
 
+  const renderPlaceholder = useMemo(() => {
+    return posts.isFetching
+      ? <CardSpinner enabled={posts.isFetching} />
+      : <CardPlaceholder />
+  }, [posts.isFetching]);
+
+  const renderList = useMemo(() => {
+    return <CardList items={posts.data} />
+  }, [posts.data]);
+
   const renderPosts = useMemo(() => {
     return posts.data.length === 0
-      ? <CardPlaceholder />
-      : <CardList items={posts.data} />
-  }, [posts.data]);
+      ? renderPlaceholder
+      : renderList
+  }, [posts.data, renderPlaceholder, renderList]);
 
   return (
     <Div className="cards">

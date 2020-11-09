@@ -19,6 +19,8 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
     width: 100%;
     max-width: 100vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
     background-color: #eeeeee;
   }
 `;

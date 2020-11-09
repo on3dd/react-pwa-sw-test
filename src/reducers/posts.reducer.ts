@@ -36,7 +36,6 @@ const postsReducer = (
 
     case FETCHING_POSTS_FAIL:
       return Object.assign({}, state, {
-        data: null,
         isFetching: false,
         hasError: true,
         errorMessage: action.payload,

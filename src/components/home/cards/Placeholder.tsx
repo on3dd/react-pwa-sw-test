@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { BREAKPOINTS } from '../../../utils/constants';
+
 const Container = styled.div`
   width: 100%;
   text-align: center;
@@ -10,7 +12,15 @@ const Container = styled.div`
 const Heading = styled.h1`
   display: block;
   margin: 0;
-  font-size: 10rem;
+  font-size: 5rem;
+
+  @media (min-width: ${BREAKPOINTS.tablet}) {
+    font-size: 7.5rem;
+  }
+
+  @media (min-width: ${BREAKPOINTS.laptop}) {
+    font-size: 10rem;
+  }
 `;
 
 const Text = styled.span`
