@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import store from './store';
+import StoreProvider from './utils/storeProvider';
+
 import App from './App';
 
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
@@ -8,7 +11,9 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <StoreProvider store={store as any}>
+      <App />
+    </StoreProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

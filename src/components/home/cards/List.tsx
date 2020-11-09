@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Card from '../../../models/Card';
+import Card from '../../../types/Post';
 import CardItem from './Item';
 
 type CardListProps = {
@@ -18,7 +18,7 @@ const CardList: React.FC<CardListProps> = (
 ) => (
     <Div className="cards__list">
       {items.map(item => {
-        return <CardItem key={item.title} {...item} />
+        return <CardItem key={item.id} {...item} />
       })}
     </Div>
   )

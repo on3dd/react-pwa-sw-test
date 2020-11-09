@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from "styled-components";
 
-import Card from '../../../models/Card';
+import fetchPosts from '../../../actions/fetchPosts';
+
+import RootState from '../../../types/states';
+
 import CardList from './List';
+import CardPlaceholder from './Placeholder';
 
 const Div = styled.div`
   display: flex;
@@ -10,25 +15,28 @@ const Div = styled.div`
   width: 100%;
 `;
 
-const items: Card[] = [
-  {
-    title: "я роняю запад у",
-    description: "байден козел гад ненавижу демократов",
-  },
-  {
-    title: "а я ебу что ли",
-    description: "я не знаю почему ты читаешь рэп",
-  },
-  {
-    title: "да сука новый автомат",
-    description: "то как мы валим на битах это на века"
-  }
-]
+const Cards: React.FC = () => {
+  const dispatch = useDispatch();
 
-const Cards: React.FC = () => (
-  <Div className="cards">
-    <CardList items={items} />
-  </Div>
-);
+  const posts = useSelector(
+    (state: RootState) => state.posts,
+  );
+
+  useEffect(() => {
+    dispatch(fetchPosts());
+  }, [dispatch]);
+
+  const renderPosts = useMemo(() => {
+    return posts.data.length === 0
+      ? <CardPlaceholder />
+      : <CardList items={posts.data} />
+  }, [posts.data]);
+
+  return (
+    <Div className="cards">
+      {renderPosts}
+    </Div>
+  )
+};
 
 export default Cards;

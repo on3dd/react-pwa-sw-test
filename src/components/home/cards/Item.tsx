@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Card from '../../../models/Card';
+import Card from '../../../types/Post';
 
 type CardItemProps = Card;
 
@@ -21,11 +21,11 @@ const Title = styled.h2`
 const Description = styled.span``;
 
 const CardItem: React.FC<CardItemProps> = ({
-  title, description
+  title, body
 }: CardItemProps) => (
     <Div className="cards__item">
       <Title>{title}</Title>
-      <Description>{description}</Description>
+      <Description>{body}</Description>
     </Div>
   )
 
